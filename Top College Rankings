@@ -1,0 +1,77 @@
+SELECT * FROM Rank ;
+
+/*Select data that we are going to be using*/
+
+SELECT Rank, Name, City, State, PP, Cost
+FROM Rank;
+
+/*Looking at Cost vs. Rank*/
+
+SELECT Rank, Name, City, State, PP, Cost, Aid, (Aid/Cost)*100 AS AidPercentage
+FROM Rank
+ORDER BY Cost DESC;
+
+/*Cheapest colleges in MA*/
+
+SELECT Rank, Name, City, State, PP, Cost, Aid,(Aid/Cost)*100 AS AidPercentage
+FROM Rank
+WHERE City IS 'Boston'
+ORDER BY Cost;
+
+/*Arizona Rankings*/
+
+SELECT Rank, Name, City, State, PP, Cost, Aid,(Aid/Cost)*100 AS AidPercentage
+FROM Rank
+WHERE State IS 'AZ'
+ORDER BY Cost;
+
+/*Seeing which states have the most colleges*/
+
+/*SELECT Count (*)
+FROM Rank
+WHERE State IS 'MA'*/
+
+/*SELECT Count(State) AS Count, State
+FROM Rank
+GROUP BY State
+ORDER BY Count DESC;*/
+
+SELECT Count(City) AS Count, City, State
+FROM Rank
+GROUP BY City, State
+ORDER BY Count DESC;
+
+/*Standardized test scores*/
+/*SAT has a max score of 1600, ACT 36*/
+
+SELECT Rank, Name, PP, SATLower, ACTLower
+FROM Rank
+WHERE SATLower and ACTLower is not ""
+ORDER BY SATLower DESC;
+
+/*Acceptance Rate*/
+
+SELECT Rank, Name, City, State, PP, Cost, Aid, (Aid/Cost)*100 AS AidPercentage, AcceptRate
+FROM Rank
+ORDER BY AcceptRate;
+
+/*Elite schools (low acceptance) are typically high ranking or specialty, private, costal, and have a high aid percentage*/
+
+
+/*Creating view to store data for later visualizations*/
+
+CREATE VIEW AcceptanceRate as
+SELECT Rank, Name, City, State, PP, Cost, Aid, (Aid/Cost)*100 AS AidPercentage, AcceptRate
+FROM Rank
+ORDER BY AcceptRate; 
+
+/*View for standardized tests*/
+
+CREATE VIEW StandardizedScores AS
+SELECT SATLower, ACTLower, Name, Rank, PP
+FROM Rank
+WHERE SATLower and ACTLower is not ""
+ORDER BY SATLower DESC;
+
+
+
