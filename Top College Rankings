@@ -11,19 +11,6 @@ SELECT Rank, Name, City, State, PP, Cost, Aid, (Aid/Cost)*100 AS AidPercentage
 FROM Rank
 ORDER BY Cost DESC;
 
-/*Cheapest colleges in MA*/
-
-SELECT Rank, Name, City, State, PP, Cost, Aid,(Aid/Cost)*100 AS AidPercentage
-FROM Rank
-WHERE City IS 'Boston'
-ORDER BY Cost;
-
-/*Arizona Rankings*/
-
-SELECT Rank, Name, City, State, PP, Cost, Aid,(Aid/Cost)*100 AS AidPercentage
-FROM Rank
-WHERE State IS 'AZ'
-ORDER BY Cost;
 
 /*Seeing which states have the most colleges*/
 
