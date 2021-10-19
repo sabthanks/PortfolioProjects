@@ -1,0 +1,12 @@
+WITH hotels AS (
+SELECT * FROM hotel_rev_2018
+union
+SELECT * FROM hotel_rev_2019
+union
+SELECT * FROM hotel_rev_2020)
+
+SELECT * FROM hotels
+JOIN hotel_market_segment
+ON hotels.market_segment = hotel_market_segment.market_segment
+JOIN hotel_meal_cost
+ON hotels.meal = hotel_meal_cost.meal
